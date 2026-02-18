@@ -1,4 +1,11 @@
+# usage:    cmake -G "MinGW Makefiles" -DBOARD=raspberry_pi_pico -DPICO_SDK_FETCH_FROM_GIT=1 -DFAMILY=rp2040 -DCMAKE_BUILD_TYPE=Release -DPICO_NO_UF2=1 . -Bbuild
+#           cmake --build ./build
 cmake_minimum_required(VERSION 3.20)
+set(CMAKE_TOOLCHAIN_FILE arm-none-eabi-gcc.cmake)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mcpu=cortex-m0plus -mthumb -Wno-error=conversion")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mcpu=cortex-m0plus -mthumb -Wno-error=conversion")
+set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -mcpu=cortex-m0plus -mthumb")
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/../hw/bsp/family_support.cmake)
 
